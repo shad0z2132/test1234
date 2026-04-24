@@ -43,26 +43,44 @@ export function SiteFooter() {
   const year = new Date().getFullYear()
 
   return (
-    <footer id="contact" className="relative px-6 pb-16 pt-32 md:px-16 md:pt-48 lg:px-32">
+    <footer
+      id="contact"
+      className="relative overflow-hidden px-6 pb-16 pt-32 md:px-16 md:pt-48 lg:px-32"
+    >
       {/* Raw Umber hairline — 20% opacity */}
       <span
         aria-hidden
         className="absolute inset-x-6 top-0 h-px bg-accent opacity-20 md:inset-x-16 lg:inset-x-32"
       />
 
-      <div className="mx-auto flex max-w-[1400px] flex-col gap-24">
+      {/* Massive ghost wordmark — anchored to bottom */}
+      <span
+        aria-hidden
+        className="pointer-events-none absolute -bottom-12 left-1/2 -translate-x-1/2 select-none whitespace-nowrap font-display text-[24vw] font-light italic leading-none text-accent/[0.03] md:text-[18vw]"
+      >
+        Studio
+      </span>
+
+      <div className="relative mx-auto flex max-w-[1400px] flex-col gap-24">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-end">
           {/* Wordmark + location stamp */}
           <div className="flex flex-col gap-4 lg:col-span-3">
             <Link
               href="/"
-              className="group inline-block font-display text-2xl italic tracking-[-0.02em] text-foreground transition-[letter-spacing] duration-[1500ms] ease-out hover:tracking-[0.01em]"
+              className="group inline-flex items-center gap-3 font-display text-2xl italic tracking-[-0.02em] text-foreground transition-[letter-spacing] duration-[1500ms] ease-out hover:tracking-[0.01em]"
             >
-              Studio
+              <span>Studio</span>
+              <span
+                aria-hidden
+                className="h-px w-0 bg-accent transition-[width] duration-[1500ms] ease-out group-hover:w-8"
+              />
             </Link>
             <span className="font-mono text-xs uppercase tracking-[0.3em] text-foreground/60">
               Viena · Arad
             </span>
+            <p className="mt-3 max-w-[26ch] font-display text-base font-light italic leading-snug text-foreground/50">
+              Pictură, scriere, prezență — privite îndelung.
+            </p>
           </div>
 
           {/* Three nav columns */}

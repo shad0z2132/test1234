@@ -192,9 +192,10 @@ function GalleryTile({
       className="group flex flex-col gap-6 focus:outline-none focus-visible:ring-1 focus-visible:ring-accent"
     >
       <div
-        className={`relative w-full overflow-hidden bg-surface ${
+        className={`relative w-full overflow-hidden bg-surface transition-transform duration-[1200ms] ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:-translate-y-1 ${
           tall ? "aspect-[3/5]" : "aspect-[4/5]"
         }`}
+        style={{ willChange: "transform" }}
       >
         <Image
           src={artwork.image.url}
@@ -206,12 +207,22 @@ function GalleryTile({
           priority={priority}
           style={{
             transitionTimingFunction: "cubic-bezier(0.19, 1, 0.22, 1)",
-            transitionDuration: "800ms",
+            transitionDuration: "1200ms",
             transitionProperty: "filter, transform",
             willChange: "filter, transform",
             transform: "translateZ(0)",
           }}
-          className="object-cover saturate-[0.82] group-hover:scale-[1.02] group-hover:saturate-100"
+          className="object-cover saturate-[0.78] group-hover:scale-[1.04] group-hover:saturate-100"
+        />
+        {/* Umber bloom from below */}
+        <span
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-accent/25 via-accent/5 to-transparent opacity-0 transition-opacity duration-[1200ms] ease-out group-hover:opacity-100"
+        />
+        {/* Inner umber ring on hover */}
+        <span
+          aria-hidden
+          className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-foreground/0 transition-[box-shadow] duration-[1200ms] ease-out group-hover:ring-accent/30"
         />
       </div>
       <div className="flex flex-col gap-3">
@@ -219,10 +230,16 @@ function GalleryTile({
           {artwork.category} / {artwork._id.replace(/\D/g, "").padStart(3, "0")}
         </span>
         <div className="flex items-end justify-between gap-6">
-          <h3 className="font-display text-2xl font-light leading-tight text-foreground text-balance">
-            {artwork.title}
+          <h3 className="font-display text-2xl font-light leading-tight text-foreground text-balance transition-colors duration-[900ms] ease-out group-hover:text-accent">
+            <span className="relative inline-block">
+              {artwork.title}
+              <span
+                aria-hidden
+                className="pointer-events-none absolute -bottom-1 left-0 h-px w-full origin-left scale-x-0 bg-accent/70 transition-transform duration-[900ms] ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:scale-x-100"
+              />
+            </span>
           </h3>
-          <span className="font-mono text-[11px] tracking-[0.12em] text-muted-foreground">
+          <span className="font-mono text-[11px] tracking-[0.12em] text-muted-foreground transition-colors duration-[900ms] ease-out group-hover:text-foreground">
             {artwork.year}
           </span>
         </div>
